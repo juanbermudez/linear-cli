@@ -1,43 +1,31 @@
-# Linear Agent CLI (Go)
+# Linear CLI
 
-A high-performance command-line interface for Linear project management, designed for AI agent consumption.
+A JSON-first command-line interface for Linear, designed for AI agents.
 
 ## Features
 
-- **JSON-first output** - Designed for programmatic consumption by AI agents
-- **Fast execution** - Single static binary, no runtime dependencies
-- **Comprehensive Linear API coverage** - Issues, projects, documents, labels, workflows
-- **VCS integration** - Git branch parsing, issue context detection
-- **24-hour caching** - Workflows, statuses, users cached for performance
+- **JSON-first output** - Structured responses for AI agents
+- **--human flag** - Readable tables for terminal use
+- **Error hints** - Helpful guidance in error responses
+- **Secure auth** - System keychain credential storage
+- **24-hour caching** - Reduced API calls for common data
+- **Stdin support** - Non-interactive setup for automation
 
 ## Installation
 
-### Homebrew (macOS/Linux)
+### Using Go
 
 ```bash
-brew install juanbermudez/tap/linear-cli
-```
-
-### Direct Download
-
-```bash
-# macOS (Apple Silicon)
-curl -fsSL https://github.com/juanbermudez/linear-agent-cli/releases/latest/download/linear-darwin-arm64 -o /usr/local/bin/linear
-chmod +x /usr/local/bin/linear
-
-# macOS (Intel)
-curl -fsSL https://github.com/juanbermudez/linear-agent-cli/releases/latest/download/linear-darwin-amd64 -o /usr/local/bin/linear
-chmod +x /usr/local/bin/linear
-
-# Linux (x86_64)
-curl -fsSL https://github.com/juanbermudez/linear-agent-cli/releases/latest/download/linear-linux-amd64 -o /usr/local/bin/linear
-chmod +x /usr/local/bin/linear
+go install github.com/juanbermudez/linear-cli/cmd/linear@latest
 ```
 
 ### From Source
 
 ```bash
-go install github.com/juanbermudez/linear-agent-cli/cmd/linear@latest
+git clone https://github.com/juanbermudez/linear-cli.git
+cd linear-cli
+make build
+make install
 ```
 
 ## Quick Start
@@ -46,9 +34,8 @@ go install github.com/juanbermudez/linear-agent-cli/cmd/linear@latest
 # Interactive setup
 linear config setup
 
-# Or set values directly
-linear config set api_key "lin_api_..."
-linear config set team_key "LOT"
+# Or login directly
+linear auth login --api-key lin_api_xxxxx --team ENG
 
 # Verify configuration
 linear whoami
@@ -60,91 +47,118 @@ linear whoami
 
 ```bash
 # List issues
-linear issue list
-linear issue list --state "In Progress"
+linear issue list --team ENG --human
+linear issue list --team ENG --state started
 
 # Create issue
-linear issue create --title "Fix login bug" --priority 2
+linear issue create --title "Fix login bug" --team ENG --priority 2
 
 # View issue
-linear issue view LOT-123
+linear issue view ENG-123
 
 # Update issue
-linear issue update LOT-123 --state "Done"
+linear issue update ENG-123 --state "Done"
+
+# Search issues
+linear issue search "authentication bug"
 
 # Create relationships
-linear issue relate LOT-123 LOT-456 --blocks
+linear issue relate ENG-123 ENG-456 --blocks
 ```
 
 ### Projects
 
 ```bash
 # List projects
-linear project list
+linear project list --human
 
 # Create project with document
-linear project create --name "Q1 Feature" --with-doc
+linear project create --name "Q1 Feature" --team ENG --with-doc
 
 # View project
-linear project view abc123
+linear project view PROJECT_ID
+
+# Add milestone
+linear project milestone create PROJECT_ID --name "Phase 1" --target-date 2025-02-15
 ```
 
 ### Documents
 
 ```bash
 # Create document
-linear document create --title "PRD: Feature X" --project abc123
+linear document create --title "PRD: Feature X" --project PROJECT_ID
 
 # List documents
-linear document list --project abc123
+linear document list --project PROJECT_ID
+
+# Search documents
+linear document search "authentication"
+```
+
+### Initiatives
+
+```bash
+# Create initiative
+linear initiative create --name "Q1 Platform Improvements" --status Active
+
+# Add project to initiative
+linear initiative project-add INIT_ID PROJECT_ID
 ```
 
 ### Workflows
 
 ```bash
 # List workflow states
-linear workflow list
+linear workflow list --team ENG
 
 # Force refresh cache
-linear workflow cache
+linear workflow cache --team ENG
 ```
 
 ## Output Modes
 
 **JSON (default)** - Machine-readable output:
 ```bash
-linear issue list
-# [{"id": "...", "identifier": "LOT-123", ...}]
+linear issue list --team ENG
+# {"issues": {"nodes": [{"id": "...", "identifier": "ENG-123", ...}]}}
 ```
 
 **Human-readable** - Formatted for terminal:
 ```bash
-linear issue list --human
-# LOT-123  Fix login bug  In Progress  @juan
+linear issue list --team ENG --human
+# ENG-123  Fix login bug  In Progress  JD  2 hours ago
+```
+
+**Error with hints** - Guidance for AI agents:
+```json
+{
+  "success": false,
+  "error": {
+    "code": "MISSING_TEAM",
+    "message": "Team is required",
+    "hint": "Specify a team using --team flag or set a default team",
+    "usage": ["linear issue list --team ENG"]
+  }
+}
 ```
 
 ## Configuration
 
-The CLI looks for `.linear.toml` in the current directory, then home directory:
+Configuration is stored in `.linear.toml`:
 
 ```toml
-api_key = "lin_api_..."
-team_id = "a5880da1-..."
-team_key = "LOT"
+team_key = "ENG"
 ```
 
-Environment variables override config file:
+API key is stored securely in your system keychain.
+
+Environment variables override config:
 - `LINEAR_API_KEY` - API key
+- `LINEAR_TEAM_KEY` - Default team
 
-## Integration with Claude Code
+## Documentation
 
-This CLI is designed to work with the [Hyper-Engineering](https://github.com/juanbermudez/hyper-eng) Claude Code plugin for spec-driven development workflows.
-
-```bash
-# In Claude Code
-claude /hyper-plan "Add user authentication"  # Creates Linear project with spec
-claude /hyper-implement project:abc123        # Implements with verification loop
-```
+Full documentation: https://juanbermudez.github.io/linear-cli
 
 ## Development
 
@@ -154,9 +168,6 @@ make build
 
 # Run tests
 make test
-
-# Build all platforms
-make build-all
 
 # Install locally
 make install
