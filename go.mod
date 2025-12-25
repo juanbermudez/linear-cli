@@ -1,4 +1,4 @@
-module github.com/juanbermudez/linear-agent-cli
+module github.com/juanbermudez/agent-linear-cli
 
 go 1.24.0
 

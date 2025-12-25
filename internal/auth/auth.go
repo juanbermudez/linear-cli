@@ -23,7 +23,7 @@ const (
 	DefaultClientID = "984973f7762db2dc5dd3c939e3f5139c"
 
 	// ServiceName is the keyring service name
-	ServiceName = "linear-cli"
+	ServiceName = "agent-linear-cli"
 
 	// TokenExpiryBuffer is how early to refresh before actual expiry
 	TokenExpiryBuffer = 5 * time.Minute

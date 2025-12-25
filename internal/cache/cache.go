@@ -12,7 +12,7 @@ const (
 	DefaultTTL = 24 * time.Hour
 
 	// CacheDir is the cache directory name
-	CacheDir = "linear-cli"
+	CacheDir = "agent-linear-cli"
 )
 
 // Entry represents a cached item with timestamp

@@ -1,4 +1,4 @@
-# Linear CLI
+# Agent Linear CLI
 
 A JSON-first command-line interface for Linear, designed for AI agents.
 
@@ -16,14 +16,14 @@ A JSON-first command-line interface for Linear, designed for AI agents.
 ### Using Go
 
 ```bash
-go install github.com/juanbermudez/linear-cli/cmd/linear@latest
+go install github.com/juanbermudez/agent-linear-cli/cmd/linear@latest
 ```
 
 ### From Source
 
 ```bash
-git clone https://github.com/juanbermudez/linear-cli.git
-cd linear-cli
+git clone https://github.com/juanbermudez/agent-linear-cli.git
+cd agent-linear-cli
 make build
 make install
 ```
@@ -158,7 +158,7 @@ Environment variables override config:
 
 ## Documentation
 
-Full documentation: https://juanbermudez.github.io/linear-cli
+Full documentation: https://juanbermudez.github.io/agent-linear-cli
 
 ## Development
 
