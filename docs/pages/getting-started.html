@@ -84,14 +84,14 @@
           <h3>Option 1: Go Install (Recommended)</h3>
           <p>If you have Go installed, this is the fastest way:</p>
           <div class="card-code-block">
-            <pre><code>go install github.com/juanbermudez/linear-agent-cli-go/cmd/linear@latest</code></pre>
+            <pre><code>go install github.com/juanbermudez/linear-cli/cmd/linear@latest</code></pre>
           </div>
 
           <h3>Option 2: Download Binary</h3>
           <p>Download the pre-built binary for your platform:</p>
           <div class="card-code-block">
             <pre><code># macOS/Linux
-curl -sSL https://github.com/juanbermudez/linear-agent-cli-go/releases/latest/download/linear-$(uname -s)-$(uname -m) -o /usr/local/bin/linear
+curl -sSL https://github.com/juanbermudez/linear-cli/releases/latest/download/linear-$(uname -s)-$(uname -m) -o /usr/local/bin/linear
 chmod +x /usr/local/bin/linear
 
 # Verify installation
@@ -100,8 +100,8 @@ linear --version</code></pre>
 
           <h3>Option 3: Build from Source</h3>
           <div class="card-code-block">
-            <pre><code>git clone https://github.com/juanbermudez/linear-agent-cli-go.git
-cd linear-agent-cli-go
+            <pre><code>git clone https://github.com/juanbermudez/linear-cli.git
+cd linear-cli
 make build
 make install</code></pre>
           </div>
