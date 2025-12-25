@@ -5,8 +5,8 @@ import (
 	"fmt"
 
 	"github.com/fatih/color"
-	"github.com/juanbermudez/linear-agent-cli/internal/api"
-	"github.com/juanbermudez/linear-agent-cli/internal/auth"
+	"github.com/juanbermudez/agent-linear-cli/internal/api"
+	"github.com/juanbermudez/agent-linear-cli/internal/auth"
 	"github.com/spf13/cobra"
 )
 

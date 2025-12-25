@@ -8,10 +8,10 @@ import (
 	"strings"
 
 	"github.com/fatih/color"
-	"github.com/juanbermudez/linear-agent-cli/internal/api"
-	"github.com/juanbermudez/linear-agent-cli/internal/auth"
-	"github.com/juanbermudez/linear-agent-cli/internal/config"
-	"github.com/juanbermudez/linear-agent-cli/internal/output"
+	"github.com/juanbermudez/agent-linear-cli/internal/api"
+	"github.com/juanbermudez/agent-linear-cli/internal/auth"
+	"github.com/juanbermudez/agent-linear-cli/internal/config"
+	"github.com/juanbermudez/agent-linear-cli/internal/output"
 	"github.com/spf13/cobra"
 )
 
@@ -355,13 +355,16 @@ Examples:
 				if IsHumanOutput() {
 					output.ErrorHuman("API key is required. Use --api-key or --stdin flag.")
 					output.HumanLn("\nTo get an API key:")
-					output.HumanLn("  1. Go to Linear Settings → API → Personal API keys")
-					output.HumanLn("  2. Create a new key")
+					output.HumanLn("  1. Go to: https://linear.app/settings/api")
+					output.HumanLn("  2. Create a new Personal API key")
 					output.HumanLn("  3. Run: linear config setup --api-key <your-key>")
 					output.HumanLn("     Or:  echo <your-key> | linear config setup --stdin")
 					return nil
 				}
-				return output.Error("MISSING_API_KEY", "API key is required")
+				return output.ErrorWithHint("MISSING_API_KEY", "API key is required",
+					"Get your API key from https://linear.app/settings/api",
+					"linear config setup --api-key lin_api_xxx",
+					"echo $LINEAR_API_KEY | linear config setup --stdin")
 			}
 
 			// Validate API key format

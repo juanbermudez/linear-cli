@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/hasura/go-graphql-client"
-	"github.com/juanbermudez/linear-agent-cli/internal/auth"
+	"github.com/juanbermudez/agent-linear-cli/internal/auth"
 )
 
 const (

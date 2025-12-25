@@ -123,7 +123,7 @@ func (m *Manager) GetToken(ctx context.Context) (string, AuthMethod, error) {
 		}
 	}
 
-	return "", AuthMethodNone, errors.New("not authenticated: run 'linear auth login' or set LINEAR_API_KEY")
+	return "", AuthMethodNone, errors.New("not authenticated: run 'linear auth login' or set LINEAR_API_KEY (get key from https://linear.app/settings/api)")
 }
 
 // GetStatus returns the current authentication status

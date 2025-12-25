@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/juanbermudez/linear-agent-cli/internal/cmd"
+	"github.com/juanbermudez/agent-linear-cli/internal/cmd"
 )
 
 // Version information (set at build time)

@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/juanbermudez/linear-agent-cli/internal/api"
-	"github.com/juanbermudez/linear-agent-cli/internal/display"
-	"github.com/juanbermudez/linear-agent-cli/internal/output"
+	"github.com/juanbermudez/agent-linear-cli/internal/api"
+	"github.com/juanbermudez/agent-linear-cli/internal/display"
+	"github.com/juanbermudez/agent-linear-cli/internal/output"
 	"github.com/spf13/cobra"
 )
 

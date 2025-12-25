@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/juanbermudez/linear-agent-cli/internal/api"
-	"github.com/juanbermudez/linear-agent-cli/internal/cache"
-	"github.com/juanbermudez/linear-agent-cli/internal/output"
+	"github.com/juanbermudez/agent-linear-cli/internal/api"
+	"github.com/juanbermudez/agent-linear-cli/internal/cache"
+	"github.com/juanbermudez/agent-linear-cli/internal/output"
 	"github.com/spf13/cobra"
 )
 

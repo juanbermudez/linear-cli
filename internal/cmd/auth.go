@@ -9,9 +9,9 @@ import (
 	"syscall"
 
 	"github.com/fatih/color"
-	"github.com/juanbermudez/linear-agent-cli/internal/api"
-	"github.com/juanbermudez/linear-agent-cli/internal/auth"
-	"github.com/juanbermudez/linear-agent-cli/internal/config"
+	"github.com/juanbermudez/agent-linear-cli/internal/api"
+	"github.com/juanbermudez/agent-linear-cli/internal/auth"
+	"github.com/juanbermudez/agent-linear-cli/internal/config"
 	"github.com/spf13/cobra"
 	"golang.org/x/term"
 )
